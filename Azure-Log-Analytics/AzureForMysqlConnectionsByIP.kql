@@ -1,0 +1,11 @@
+// Script for log analytics Workspace
+//
+// Render the graf IP count connections to server sum by IP address and status CONNECTED or DISCONNECTED
+// 
+// For working you need to enable audit log and send logs to analytics workspace
+
+
+AzureDiagnostics
+| project event_subclass_s, ip_s, TimeGenerated
+| summarize count() by ip_s, event_subclass_s
+| render  barchart  
